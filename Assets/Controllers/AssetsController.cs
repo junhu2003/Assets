@@ -22,8 +22,8 @@ namespace CrudOperationApi.Controllers
         }
 
         [HttpGet]
-        [Route("{id:guid}")]
-        public async Task<IActionResult> GetAsset([FromRoute] Guid id)
+        [Route("{id:long}")]
+        public async Task<IActionResult> GetAsset([FromRoute] long id)
         {
             var asset = await dbContext.Assets.FindAsync(id);
             if (asset != null)
@@ -37,8 +37,7 @@ namespace CrudOperationApi.Controllers
         public async Task<IActionResult> AddAsset(AssetRequest assetRequest)
         {
             var asset = new Asset()
-            {
-                Id = Guid.NewGuid(),
+            {                
                 Name = assetRequest.Name,
                 Value = assetRequest.Value,
                 CategoryId = assetRequest.CategoryId,                
@@ -49,8 +48,8 @@ namespace CrudOperationApi.Controllers
         }
 
         [HttpPut]
-        [Route("{id:guid}")]
-        public async Task<IActionResult> UpdateAsset([FromRoute] Guid id, AssetRequest assetRequest)
+        [Route("{id:long}")]
+        public async Task<IActionResult> UpdateAsset([FromRoute] long id, AssetRequest assetRequest)
         {
             var asset = await dbContext.Assets.FindAsync(id);
             if (asset != null)
@@ -66,8 +65,8 @@ namespace CrudOperationApi.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:guid}")]
-        public async Task<IActionResult> DeleteAsset(Guid id)
+        [Route("{id:long}")]
+        public async Task<IActionResult> DeleteAsset(long id)
         {
             var asset = await dbContext.Assets.FindAsync(id);
             if (asset != null)

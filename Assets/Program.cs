@@ -33,8 +33,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-builder.Services.AddDbContext<AssetsAPIDbContext>(option => option.UseInMemoryDatabase("AssetsDb"));
-builder.Services.AddDbContext<CategoriesAPIDbContext>(option => option.UseInMemoryDatabase("CategoriesDb"));
+builder.Services.AddDbContext<AssetsAPIDbContext>(option => option.UseSqlite(config.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

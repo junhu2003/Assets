@@ -9,8 +9,8 @@ namespace CrudOperationApi.Controllers
     [Route("api/[Controller]")]
     public class CategoriesController : ControllerBase
     {
-        private CategoriesAPIDbContext dbContext;
-        public CategoriesController(CategoriesAPIDbContext dbContext)
+        private AssetsAPIDbContext dbContext;
+        public CategoriesController(AssetsAPIDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
@@ -22,8 +22,8 @@ namespace CrudOperationApi.Controllers
         }
 
         [HttpGet]
-        [Route("{id:guid}")]
-        public async Task<IActionResult> GetCategory([FromRoute] Guid id)
+        [Route("{id:long}")]
+        public async Task<IActionResult> GetCategory([FromRoute] long id)
         {
             var category = await dbContext.Categories.FindAsync(id);
             if (category != null)
@@ -37,8 +37,7 @@ namespace CrudOperationApi.Controllers
         public async Task<IActionResult> AddCategory(CategoryRequest categoryRequest)
         {
             var category = new Category()
-            {
-                Id = Guid.NewGuid(),
+            {                
                 Name = categoryRequest.Name,                
             };
             await dbContext.Categories.AddAsync(category);
@@ -47,8 +46,8 @@ namespace CrudOperationApi.Controllers
         }
 
         [HttpPut]
-        [Route("{id:guid}")]
-        public async Task<IActionResult> UpdateCategory([FromRoute] Guid id, CategoryRequest categoryRequest)
+        [Route("{id:long}")]
+        public async Task<IActionResult> UpdateCategory([FromRoute] long id, CategoryRequest categoryRequest)
         {
             var category = await dbContext.Categories.FindAsync(id);
             if (category != null)
@@ -62,8 +61,8 @@ namespace CrudOperationApi.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:guid}")]
-        public async Task<IActionResult> DeleteCategory(Guid id)
+        [Route("{id:long}")]
+        public async Task<IActionResult> DeleteCategory(long id)
         {
             var category = await dbContext.Categories.FindAsync(id);
             if (category != null)

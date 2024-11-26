@@ -9,5 +9,6 @@ namespace AssetsApi.Data
     {
         public AssetsAPIDbContext(DbContextOptions options) : base(options) { }
         public DbSet<Asset> Assets { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
