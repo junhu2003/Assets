@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:7195';
+const baseUrl = 'https://localhost:7195';
 
 export const AssetsApi = {
 
